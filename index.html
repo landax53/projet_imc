@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcul d'IMC</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Calculez votre IMC</h1>
+
+    <form>
+      <fieldset>
+        <legend>Calcul de votre IMC</legend>
+        <label for="poids">Votre poids (en kg) :</label>
+        <input type="number" id="poids" /><br />
+        <label for="taille">Votre taille (en mètre) :</label>
+        <input type="number" id="taille" /><br />
+        <label for="date">Date :</label>
+        <input type="date" id="date" /><br />
+        <input type="button" id="btn" value="calculer" />
+      </fieldset>
+    </form>
+    <br />
+
+    <div id="list_category">
+      <fieldset>
+        <legend>Tableau de correspondance CATEGORIE --> IMC</legend>
+        <div id="list">
+          <ul id="myUl">
+            <li>Poids insuffisant</li>
+            <li>Poids normal</li>
+            <li>Embonpoint</li>
+            <li>Obésité classe I</li>
+            <li>Obésité classe II</li>
+            <li>Obésité classe III</li>
+          </ul>
+
+          <ul id="arrow">
+            <li>---></li>
+            <li>---></li>
+            <li>---></li>
+            <li>---></li>
+            <li>---></li>
+            <li>---></li>
+          </ul>
+          <ul id="myUlIMC">
+            <li>IMC < 18,5</li>
+            <li>18,5 <= IMC <= 24,9</li>
+            <li>25 <= IMC <= 29,9</li>
+            <li>30 <= IMC <= 34,9</li>
+            <li>35 <= IMC <= 39,9</li>
+            <li>40 <= IMC</li>
+          </ul>
+        </div>
+      </fieldset>
+    </div>
+
+    <fieldset id="result">
+      <legend>Résultats</legend>
+    </fieldset>
+
+    <div id="resultLine"></div>
+    <div id="arrowResult"></div>
+    <canvas id="myChart" width='600' height='200'></canvas>
+
+    <!--SCRIPT-->
+
+    <script>
+      let button = document.getElementById("btn");
+      let outputResult = document.createElement("div");
+      let outputCategory = document.createElement("div");
+      let fieldsetResult = document.getElementById("result");
+      fieldsetResult.style.display = "none";
+      let resultLine = document.getElementById("resultLine");
+      let arrowResult = document.getElementById("arrowResult");
+      let horizontalLine = document.createElement("div");
+
+      button.addEventListener("click", () => {
+        outputResult.textContent = "";
+        let poids = document.getElementById("poids").value;
+        let taille = document.getElementById("taille").value;
+        const IMC = Math.round((poids / taille ** 2) * 10) / 10;
+        outputResult.textContent = `Votre IMC est de : ${IMC}`;
+        fieldsetResult.appendChild(outputResult);
+        console.log(outputResult);
+        let div = document.createElement("div");
+        fieldsetResult.appendChild(div);
+
+        let p = document.createElement("p");
+        let list = document.getElementById("myUl").getElementsByTagName("LI");
+
+        if (IMC < 18.5) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[0].innerHTML.charAt(0).toLowerCase() +
+            list[0].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowInsuffisant"></i>';
+        } else if (IMC >= 18.5 && IMC <= 24.9) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[1].innerHTML.charAt(0).toLowerCase() +
+            list[1].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowNormal"></i>';
+        } else if (IMC >= 25 && IMC <= 29.9) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[2].innerHTML.charAt(0).toLowerCase() +
+            list[2].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowEmbonpoint"></i>';
+        } else if (IMC >= 30 && IMC <= 34.9) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[3].innerHTML.charAt(0).toLowerCase() +
+            list[3].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowObésitéI"></i>';
+        } else if (IMC >= 35 && IMC <= 39.9) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[4].innerHTML.charAt(0).toLowerCase() +
+            list[4].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowObésitéII"></i>';
+        } else if (IMC >= 40) {
+          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+            list[5].innerHTML.charAt(0).toLowerCase() +
+            list[5].innerHTML.substr(1)
+          }</strong>`;
+          arrowResult.innerHTML =
+            '<i class="fas fa-arrow-up" id="arrowObésitéIII"></i>';
+        }
+
+        console.log(list[1].innerHTML);
+
+        fieldsetResult.appendChild(outputCategory);
+        fieldsetResult.style.display = "block";
+        horizontalLine.id = "horizontalLine";
+        resultLine.appendChild(horizontalLine);
+
+        // BARRE D'INDICATION CATEGORIE
+
+        horizontalLine.innerHTML = "";
+
+        let poidsInsuffisant = document.createElement("div");
+        poidsInsuffisant.id = "poidsInsuffisant";
+        poidsInsuffisant.textContent = "Poids insuffisant";
+        horizontalLine.appendChild(poidsInsuffisant);
+
+        let poidsNormal = document.createElement("div");
+        poidsNormal.id = "poidsNormal";
+        poidsNormal.textContent = "Poids normal";
+        horizontalLine.appendChild(poidsNormal);
+
+        let embonpoint = document.createElement("div");
+        embonpoint.textContent = "Embonpoint";
+        embonpoint.id = "embonpoint";
+        horizontalLine.appendChild(embonpoint);
+
+        let obésitéI = document.createElement("div");
+        obésitéI.id = "obésitéI";
+        obésitéI.textContent = "Obésité I";
+        horizontalLine.appendChild(obésitéI);
+
+        let obésitéII = document.createElement("div");
+        obésitéII.id = "obésitéII";
+        obésitéII.textContent = "Obésité II";
+        horizontalLine.appendChild(obésitéII);
+
+        let obésitéIII = document.createElement("div");
+        obésitéIII.id = "obésitéIII";
+        obésitéIII.textContent = "Obésité III";
+        horizontalLine.appendChild(obésitéIII);
+
+        // GRAPHIQUE HISTORIQUE POIDS
+        var ctx = document.getElementById('myChart').getContext("2d")
+        const labels = Utils.months({count: 7});
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                label: 'Dataset 1',
+                data: Utils.numbers(NUMBER_CFG),
+                borderColor: Utils.CHART_COLORS.red,
+                backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
+                },
+                {
+                label: 'Dataset 2',
+                data: Utils.numbers(NUMBER_CFG),
+                borderColor: Utils.CHART_COLORS.blue,
+                backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+                }
+            ]
+        };
+
+        const myChart = new Chart(ctx, {
+            type:'line',
+            data: data,
+            options: {
+            responsive: true,
+            plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart'
+            }
+            }
+            },
+        })
+
+    });
+    </script>
+  </body>
+</html>

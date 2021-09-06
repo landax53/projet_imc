@@ -1,0 +1,189 @@
+* {
+  background-color: bisque;
+  margin: 0;
+  padding: 0;
+}
+
+#list {
+  display: flex;
+  list-style-type: none;
+}
+
+fieldset {
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+#horizontalLine {
+  /* border: 0.5px black solid; */
+  margin-top: 30px;
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+#poidsInsuffisant {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 12%;
+  background-color: rgb(122, 122, 255);
+}
+
+#poidsNormal {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 21.5%;
+  background-color: rgb(122, 255, 173);
+}
+
+#embonpoint {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 16.5%;
+  background-color: rgb(231, 255, 122);
+}
+
+#obésitéI {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 16.5%;
+  background-color: rgb(255, 197, 122);
+}
+
+#obésitéII {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 16.5%;
+  background-color: rgb(255, 160, 122);
+}
+
+#obésitéIII {
+  /* border: 0.5px black solid; */
+  display: inline-block;
+  height: 20px;
+  width: 15.5%;
+  background-color: rgb(255, 122, 122);
+}
+
+#arrowInsuffisant {
+  animation-duration: 3s;
+  animation-name: glissementInsuffisant;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementInsuffisant {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 6vw;
+  }
+}
+
+#arrowNormal {
+  animation-duration: 3s;
+  animation-name: glissementNormal;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementNormal {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 23vw;
+  }
+}
+
+#arrowEmbonpoint {
+  animation-duration: 3s;
+  animation-name: glissementEmbonpoint;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementEmbonpoint {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 42vw;
+  }
+}
+
+#arrowObésitéI {
+  animation-duration: 3s;
+  animation-name: glissementOI;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementOI {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 58vw;
+  }
+}
+
+#arrowObésitéII {
+  animation-duration: 3s;
+  animation-name: glissementOII;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementOII {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 74.5vw;
+  }
+}
+
+#arrowObésitéIII {
+  animation-duration: 3s;
+  animation-name: glissementOIII;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glissementOIII {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 92vw;
+  }
+}
+
+#historiquePoids {
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  background-color: #f4f4f4;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
