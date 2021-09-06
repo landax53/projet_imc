@@ -1,21 +1,112 @@
 * {
-  background-color: bisque;
   margin: 0;
   padding: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-#list {
+h1 {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+  align-items: center;
+  margin-bottom: 5px;
+  background-color: rgb(201, 214, 191);
+  border-radius: 15px;
+  height: 50px;
+  color: rgb(133, 54, 179);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 97vw;
+  max-width: 1200px;
+  margin: 10px auto;
+}
+
+#firstPart {
+  display: flex;
+  gap: 5px;
+}
+
+.list_category fieldset {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.list_category {
+  display: inline-block;
+  width: 100%;
+}
+fieldset {
+  padding: 10px;
+  background-color: rgb(201, 214, 191);
+  border-radius: 15px;
+  border: none;
+  align-self: center;
+}
+
+legend {
+  font-style: italic;
+  font-weight: bold;
+  color: rgb(133, 54, 179);
+  padding-left: 20px;
+}
+
+#myLabel li,
+#myInput li {
+  padding-top: 10px;
+}
+
+input {
+  outline: none;
+  border: 0.5px solid gray;
+}
+
+#poids,
+#taille,
+#date {
+  width: 120px;
+}
+
+#btn {
+  background: rgb(252, 255, 249);
+  border: none;
+  height: 20px;
+  width: 120px;
+  border-radius: 10px;
+  margin-left: 40px;
+  margin-top: 50px;
+  align-items: center;
+  color: rgb(57, 57, 119);
+}
+
+#btn:hover {
+  box-shadow: 0 0 5px rgb(117, 129, 109);
+}
+.list {
   display: flex;
   list-style-type: none;
 }
 
-fieldset {
-  padding: 10px;
-}
-
 ul {
   list-style-type: none;
-  padding: 10px;
+  padding: 10px 20px;
+}
+
+li {
+  background: none;
+  color: rgb(145, 35, 86);
+}
+
+form li {
+  padding-top: 10px;
+}
+
+#result {
+  color: rgb(57, 57, 119);
+  padding-left: 20px;
 }
 
 #horizontalLine {
@@ -76,7 +167,7 @@ ul {
 }
 
 #arrowInsuffisant {
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-name: glissementInsuffisant;
   animation-delay: 1s;
   animation-fill-mode: forwards;
@@ -105,7 +196,7 @@ ul {
   }
 
   to {
-    margin-left: 23vw;
+    margin-left: 22vw;
   }
 }
 
@@ -122,7 +213,7 @@ ul {
   }
 
   to {
-    margin-left: 42vw;
+    margin-left: 40vw;
   }
 }
 
@@ -139,7 +230,7 @@ ul {
   }
 
   to {
-    margin-left: 58vw;
+    margin-left: 55vw;
   }
 }
 
@@ -156,7 +247,7 @@ ul {
   }
 
   to {
-    margin-left: 74.5vw;
+    margin-left: 70.5vw;
   }
 }
 
@@ -173,7 +264,7 @@ ul {
   }
 
   to {
-    margin-left: 92vw;
+    margin-left: 86vw;
   }
 }
 

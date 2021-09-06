@@ -14,52 +14,63 @@
   </head>
   <body>
     <h1>Calculez votre IMC</h1>
+    <div id="firstPart">
+      <div class="list_category">
+          <fieldset>
+            <legend>Calcul de votre IMC</legend>
+            <form>
+              <div class=list>
+                <ul id="myLabel">
+                    <li><label for="poids">Votre poids (en kg) :</label></li>
+                    <li><label for="taille">Votre taille (en mètre) :</label></li>
+                    <li><label for="date">Date :</label></li>
+                  </ul>
+                
+                <ul id='myInput'>
+                    <li><input type="number" id="poids" required='required' autofocus/></li>
+                    <li><input type="number" id="taille" required='required' /></li>
+                    <li><input type="date" id="date" /></li>
+                </ul>
+                <input type="submit" id="btn" value="Calculez votre IMC" />
+              </div>
+            </form>
+          </fieldset>
+      </div>
+      
+      <br />
 
-    <form>
-      <fieldset>
-        <legend>Calcul de votre IMC</legend>
-        <label for="poids">Votre poids (en kg) :</label>
-        <input type="number" id="poids" /><br />
-        <label for="taille">Votre taille (en mètre) :</label>
-        <input type="number" id="taille" /><br />
-        <label for="date">Date :</label>
-        <input type="date" id="date" /><br />
-        <input type="button" id="btn" value="calculer" />
-      </fieldset>
-    </form>
-    <br />
+      <div class="list_category">
+        <fieldset>
+          <legend>Tableau de correspondance CATEGORIE --> IMC</legend>
+          <div class="list">
+            <ul id="myUl">
+              <li>Poids insuffisant</li>
+              <li>Poids normal</li>
+              <li>Embonpoint</li>
+              <li>Obésité classe I</li>
+              <li>Obésité classe II</li>
+              <li>Obésité classe III</li>
+            </ul>
 
-    <div id="list_category">
-      <fieldset>
-        <legend>Tableau de correspondance CATEGORIE --> IMC</legend>
-        <div id="list">
-          <ul id="myUl">
-            <li>Poids insuffisant</li>
-            <li>Poids normal</li>
-            <li>Embonpoint</li>
-            <li>Obésité classe I</li>
-            <li>Obésité classe II</li>
-            <li>Obésité classe III</li>
-          </ul>
-
-          <ul id="arrow">
-            <li>---></li>
-            <li>---></li>
-            <li>---></li>
-            <li>---></li>
-            <li>---></li>
-            <li>---></li>
-          </ul>
-          <ul id="myUlIMC">
-            <li>IMC < 18,5</li>
-            <li>18,5 <= IMC <= 24,9</li>
-            <li>25 <= IMC <= 29,9</li>
-            <li>30 <= IMC <= 34,9</li>
-            <li>35 <= IMC <= 39,9</li>
-            <li>40 <= IMC</li>
-          </ul>
-        </div>
-      </fieldset>
+            <ul id="arrow">
+              <li>---></li>
+              <li>---></li>
+              <li>---></li>
+              <li>---></li>
+              <li>---></li>
+              <li>---></li>
+            </ul>
+            <ul id="myUlIMC">
+              <li>IMC < 18,5</li>
+              <li>18,5 <= IMC <= 24,9</li>
+              <li>25 <= IMC <= 29,9</li>
+              <li>30 <= IMC <= 34,9</li>
+              <li>35 <= IMC <= 39,9</li>
+              <li>40 <= IMC</li>
+            </ul>
+          </div>
+        </fieldset>
+      </div>
     </div>
 
     <fieldset id="result">
@@ -70,9 +81,11 @@
     <div id="arrowResult"></div>
     <canvas id="myChart" width='600' height='200'></canvas>
 
-    <!--SCRIPT-->
+    <!------------------------------SCRIPT------------------------------------->
 
     <script>
+
+        // INPUTS
       let button = document.getElementById("btn");
       let outputResult = document.createElement("div");
       let outputCategory = document.createElement("div");
@@ -81,9 +94,14 @@
       let resultLine = document.getElementById("resultLine");
       let arrowResult = document.getElementById("arrowResult");
       let horizontalLine = document.createElement("div");
+      let canvas = document.getElementById('myChart')
+      canvas.style.display='none'
+      let list = document.getElementById("myUl").getElementsByTagName("LI");
+     
 
       button.addEventListener("click", () => {
         outputResult.textContent = "";
+        outputResult.style.background ='none'
         let poids = document.getElementById("poids").value;
         let taille = document.getElementById("taille").value;
         const IMC = Math.round((poids / taille ** 2) * 10) / 10;
@@ -91,11 +109,13 @@
         fieldsetResult.appendChild(outputResult);
         console.log(outputResult);
         let div = document.createElement("div");
+        div.id='myResult'
         fieldsetResult.appendChild(div);
 
-        let p = document.createElement("p");
-        let list = document.getElementById("myUl").getElementsByTagName("LI");
+        
+        // RESULTATS 
 
+        outputCategory.style.background='none';
         if (IMC < 18.5) {
           outputCategory.innerHTML = ` Ceci correspond à un <strong>${
             list[0].innerHTML.charAt(0).toLowerCase() +
@@ -125,14 +145,14 @@
           arrowResult.innerHTML =
             '<i class="fas fa-arrow-up" id="arrowObésitéI"></i>';
         } else if (IMC >= 35 && IMC <= 39.9) {
-          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+          outputCategory.innerHTML = ` Ceci correspond à une <strong>${
             list[4].innerHTML.charAt(0).toLowerCase() +
             list[4].innerHTML.substr(1)
           }</strong>`;
           arrowResult.innerHTML =
             '<i class="fas fa-arrow-up" id="arrowObésitéII"></i>';
         } else if (IMC >= 40) {
-          outputCategory.innerHTML = ` Ceci correspond à un <strong>${
+          outputCategory.innerHTML = ` Ceci correspond à une <strong>${
             list[5].innerHTML.charAt(0).toLowerCase() +
             list[5].innerHTML.substr(1)
           }</strong>`;
@@ -182,42 +202,57 @@
         horizontalLine.appendChild(obésitéIII);
 
         // GRAPHIQUE HISTORIQUE POIDS
-        var ctx = document.getElementById('myChart').getContext("2d")
-        const labels = Utils.months({count: 7});
+
+        canvas.style.display = 'inline'
+
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'June',
+            'July',
+            'August',
+            'September',
+        ];
+
         const data = {
-            labels: labels,
-            datasets: [
-                {
-                label: 'Dataset 1',
-                data: Utils.numbers(NUMBER_CFG),
-                borderColor: Utils.CHART_COLORS.red,
-                backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-                },
-                {
-                label: 'Dataset 2',
-                data: Utils.numbers(NUMBER_CFG),
-                borderColor: Utils.CHART_COLORS.blue,
-                backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-                }
-            ]
+            labels : labels,
+            datasets: [{
+                label: 'Poids de Vincent',
+                backgroundColor: "rgb(133,54,179)",
+                borderColor: "rgb(133,54,179)",
+                data: [73, 75, 77, 76, 74, 74, 75, poids]
+            }]
+        }
+
+        var options = {
+              responsive : true,
+              scales: {
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Kilogrammes'
+                        }
+                        }
+                    }
+                
+        }
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: options,
+                       
         };
 
-        const myChart = new Chart(ctx, {
-            type:'line',
-            data: data,
-            options: {
-            responsive: true,
-            plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Chart.js Line Chart'
-            }
-            }
-            },
-        })
+         // RENDERING THE CHART
+
+        let myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        )
 
     });
     </script>
